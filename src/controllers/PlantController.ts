@@ -25,18 +25,22 @@ class PlantController {
       plantImage,
     } = req.body;
 
-    const plant = await plantService.create({
-      popularName,
-      scientificName,
-      ambience,
-      origin,
-      climate,
-      gender,
-      description,
-      plantImage,
-    });
+    try {
+      const plant = await plantService.create({
+        popularName,
+        scientificName,
+        ambience,
+        origin,
+        climate,
+        gender,
+        description,
+        plantImage,
+      });
 
-    return res.status(200).json(plant);
+      return res.status(200).json(plant);
+    } catch (err) {
+      return res.status(404).json({ error: { message: err.message } });
+    }
   }
 
   async show(req: Request, res: Response) {
