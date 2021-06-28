@@ -3,7 +3,7 @@ import PlantRepository from "../repositories/PlantRepository";
 import { validate } from "uuid";
 import { classToPlain } from "class-transformer";
 
-interface PlantType {
+interface PlantInterface {
   popularName: string;
   scientificName: string;
   ambience: string;
@@ -24,7 +24,7 @@ class PlantService {
     gender,
     description,
     plantImage,
-  }: PlantType) {
+  }: PlantInterface) {
     const repository = getCustomRepository(PlantRepository);
 
     const hasPlant = await repository.findOne({ popularName });
