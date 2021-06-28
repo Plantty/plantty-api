@@ -48,7 +48,7 @@ class PlantController {
       const plant = await plantService.find(search);
       return res.status(200).json(plant);
     } catch (err) {
-      return res.status(400).json({ error: { message: err.message } });
+      return res.status(404).json({ error: { message: err.message } });
     }
   }
 }
