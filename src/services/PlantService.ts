@@ -30,7 +30,7 @@ class PlantService {
     const hasPlant = await repository.findOne({ popularName });
 
     if (hasPlant) {
-      throw new Error("Plant has exist");
+      throw new Error("Plant already exists");
     }
 
     const plant = await repository.create({
