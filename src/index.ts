@@ -12,5 +12,8 @@ server.use(express.urlencoded({ extended: true }));
 server.use(routes);
 
 server.listen(3000, () => {
-  console.log("Server has been running on localhost:3000");
+  console.log();
+  console.log("Plantty ☘️  - api-rest has been initialized");
+  console.log("Running on localhost:3000");
+  console.log();
 });
