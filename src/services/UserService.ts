@@ -1,3 +1,4 @@
+import { hash } from "bcryptjs";
 import { getCustomRepository } from "typeorm";
 import { validate } from "uuid";
 import UserRepository from "../repositories/UserRepository";
@@ -25,13 +26,15 @@ class UserService {
     const hasUser = await repository.findOne({ email });
 
     if (hasUser) {
-      throw new Error("Admin user already exists");
+      throw new Error("User already exists");
     }
+
+    const hashPassword = await hash(password, 8);
 
     const user = await repository.create({
       firstName,
       lastName,
-      password,
+      password: hashPassword,
       email,
       photo_url,
       birthDate,
@@ -50,7 +53,7 @@ class UserService {
     );
 
     if (!user) {
-      throw new Error("Admin user not exists");
+      throw new Error("User not exists");
     }
 
     return user;
