@@ -28,6 +28,8 @@ class LogController {
   }
 
   async show(req: Request, res: Response) {
+    const user = req.user;
+
     const logService = new LogService();
 
     const { id } = req.params;

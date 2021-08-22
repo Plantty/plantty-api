@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import PlantService from "../services/PlantService";
+import cloudinary from "../utils/Cloudinary";
 
 class PlantController {
   async index(req: Request, res: Response) {
@@ -21,11 +22,16 @@ class PlantController {
       origin,
       climate,
       gender,
-      description,
-      plantImage,
+      description
     } = req.body;
 
     try {
+      
+      const imageUpload = await cloudinary.uploader.upload(req.file.path, {
+        folder: "plants",
+        resource_type: "auto"
+      });
+
       const plant = await plantService.create({
         popularName,
         scientificName,
@@ -34,11 +40,12 @@ class PlantController {
         climate,
         gender,
         description,
-        plantImage,
+        plantImage: imageUpload.url,
       });
 
       return res.status(200).json(plant);
     } catch (err) {
+      console.log(err);
       return res.status(404).json({ error: { message: err.message } });
     }
   }

@@ -3,7 +3,7 @@ import plantRoutes from "./plants.routes";
 import logsRoutes from "./logs.routes";
 import userRoutes from "./user.routes";
 import adminUserRoutes from "./adminUser.routes";
-import commentRoutes from "./coments.routes";
+import commentRoutes from "./comments.routes";
 
 const router = Router();
 
